@@ -1,0 +1,788 @@
+ubuntu@ip-172-31-16-147:~$ ls
+hcmask  phpbb.txt  shadow1.txt  shadow2.txt  top100passwd.txt
+ubuntu@ip-172-31-16-147:~$ hashcat -b
+hashcat (v4.1.0) starting in benchmark mode...
+
+Benchmarking uses hand-optimized kernel code by default.
+You can use it in your cracking session by setting the -O option.
+Note: Using optimized kernel code limits the maximum supported password length.
+To disable the optimized kernel code in benchmark mode, use the -w option.
+
+* Device #1: This hardware has outdated CUDA compute capability (3.7).
+             For modern OpenCL performance, upgrade to hardware that supports
+             CUDA compute capability version 5.0 (Maxwell) or higher.
+* Device #2: Not a native Intel OpenCL runtime. Expect massive speed loss.
+             You can use --force to override, but do not report related errors.
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: Tesla K80, 2860/11441 MB allocatable, 13MCU
+
+OpenCL Platform #2: The pocl project
+====================================
+* Device #2: pthread-Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz, skipped.
+
+Benchmark relevant options:
+===========================
+* --optimized-kernel-enable
+
+Hashmode: 0 - MD5
+
+Speed.Dev.#1.....:  4429.1 MH/s (50.73ms) @ Accel:128 Loops:128 Thr:1024 Vec:2
+
+Hashmode: 100 - SHA1
+
+Speed.Dev.#1.....:  1758.4 MH/s (95.37ms) @ Accel:256 Loops:128 Thr:384 Vec:4
+
+Hashmode: 1400 - SHA-256
+
+Speed.Dev.#1.....:   788.9 MH/s (71.84ms) @ Accel:128 Loops:32 Thr:1024 Vec:1
+
+Hashmode: 1700 - SHA-512
+
+Speed.Dev.#1.....:   254.4 MH/s (69.38ms) @ Accel:64 Loops:32 Thr:640 Vec:1
+
+Hashmode: 2500 - WPA/WPA2 (Iterations: 4096)
+
+^C
+ubuntu@ip-172-31-16-147:~$ ^C
+ubuntu@ip-172-31-16-147:~$ ls
+hcmask  phpbb.txt  shadow1.txt  shadow2.txt  top100passwd.txt
+ubuntu@ip-172-31-16-147:~$ more top100passwd.txt
+123456
+password
+12345678
+qwerty
+123456789
+12345
+1234
+111111
+1234567
+dragon
+123123
+baseball
+abc123
+football
+monkey
+letmein
+696969
+shadow
+master
+666666
+qwertyuiop
+123321
+mustang
+1234567890
+michael
+654321
+pussy
+superman
+1qaz2wsx
+7777777
+fuckyou
+121212
+000000
+qazwsx
+123qwe
+killer
+trustno1
+jordan
+jennifer
+zxcvbnm
+asdfgh
+hunter
+buster
+soccer
+harley
+batman
+andrew
+tigger
+sunshine
+iloveyou
+fuckme
+2000
+charlie
+robert
+thomas
+hockey
+ranger
+daniel
+starwars
+klaster
+112233
+george
+asshole
+computer
+michelle
+jessica
+pepper
+1111
+zxcvbn
+555555
+11111111
+131313
+freedom
+777777
+pass
+fuck
+maggie
+159753
+aaaaaa
+ginger
+princess
+joshua
+cheese
+amanda
+summer
+love
+ashley
+6969
+nicole
+chelsea
+biteme
+matthew
+access
+yankees
+987654321
+dallas
+austin
+thunder
+taylor
+matrix
+ubuntu@ip-172-31-16-147:~$
+ubuntu@ip-172-31-16-147:~$
+ubuntu@ip-172-31-16-147:~$ grep '666666' top100passwd.txt
+666666
+ubuntu@ip-172-31-16-147:~$ grep 'access' top100passwd.txt
+access
+ubuntu@ip-172-31-16-147:~$ sudo useradd csr
+ubuntu@ip-172-31-16-147:~$ sudo useradd nsa
+ubuntu@ip-172-31-16-147:~$ sudo passwd csr
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+ubuntu@ip-172-31-16-147:~$ sudo passwd nsa
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+ubuntu@ip-172-31-16-147:~$ sudo cp /etc/shadow shadow.txt
+ubuntu@ip-172-31-16-147:~$ ls -al
+total 1608
+drwxr-xr-x 6 ubuntu ubuntu    4096 Apr  1 19:48 .
+drwxr-xr-x 3 root   root      4096 Aug 17  2018 ..
+-rw------- 1 ubuntu ubuntu     947 Aug 17  2018 .bash_history
+-rw-r--r-- 1 ubuntu ubuntu     220 Aug 31  2015 .bash_logout
+-rw-r--r-- 1 ubuntu ubuntu    3771 Aug 31  2015 .bashrc
+drwx------ 3 ubuntu ubuntu    4096 Aug 17  2018 .cache
+drwxr-xr-x 2 ubuntu ubuntu    4096 Aug 17  2018 .data
+drwx------ 4 ubuntu ubuntu    4096 Aug 17  2018 .hashcat
+-rw-r--r-- 1 ubuntu ubuntu      19 Aug 17  2018 hcmask
+-rw-rw-r-- 1 ubuntu ubuntu 1574395 Mar  5  2018 phpbb.txt
+-rw-r--r-- 1 ubuntu ubuntu     655 May 16  2017 .profile
+-rw-r--r-- 1 ubuntu ubuntu     107 Aug 17  2018 shadow1.txt
+-rw-r--r-- 1 ubuntu ubuntu     107 Aug 17  2018 shadow2.txt
+-rw-r----- 1 root   root      1192 Apr  1 19:48 shadow.txt
+drwx------ 2 ubuntu ubuntu    4096 Aug 17  2018 .ssh
+-rw-r--r-- 1 ubuntu ubuntu       0 Aug 17  2018 .sudo_as_admin_successful
+-rw-r--r-- 1 ubuntu ubuntu     744 Aug 17  2018 top100passwd.txt
+-rw------- 1 ubuntu ubuntu    1369 Aug 17  2018 .viminfo
+-rw-rw-r-- 1 ubuntu ubuntu     185 Aug 17  2018 .wget-hsts
+ubuntu@ip-172-31-16-147:~$ sudo chown ubuntu:ubuntu shadow.txt
+ubuntu@ip-172-31-16-147:~$ ls -al
+total 1608
+drwxr-xr-x 6 ubuntu ubuntu    4096 Apr  1 19:48 .
+drwxr-xr-x 3 root   root      4096 Aug 17  2018 ..
+-rw------- 1 ubuntu ubuntu     947 Aug 17  2018 .bash_history
+-rw-r--r-- 1 ubuntu ubuntu     220 Aug 31  2015 .bash_logout
+-rw-r--r-- 1 ubuntu ubuntu    3771 Aug 31  2015 .bashrc
+drwx------ 3 ubuntu ubuntu    4096 Aug 17  2018 .cache
+drwxr-xr-x 2 ubuntu ubuntu    4096 Aug 17  2018 .data
+drwx------ 4 ubuntu ubuntu    4096 Aug 17  2018 .hashcat
+-rw-r--r-- 1 ubuntu ubuntu      19 Aug 17  2018 hcmask
+-rw-rw-r-- 1 ubuntu ubuntu 1574395 Mar  5  2018 phpbb.txt
+-rw-r--r-- 1 ubuntu ubuntu     655 May 16  2017 .profile
+-rw-r--r-- 1 ubuntu ubuntu     107 Aug 17  2018 shadow1.txt
+-rw-r--r-- 1 ubuntu ubuntu     107 Aug 17  2018 shadow2.txt
+-rw-r----- 1 ubuntu ubuntu    1192 Apr  1 19:48 shadow.txt
+drwx------ 2 ubuntu ubuntu    4096 Aug 17  2018 .ssh
+-rw-r--r-- 1 ubuntu ubuntu       0 Aug 17  2018 .sudo_as_admin_successful
+-rw-r--r-- 1 ubuntu ubuntu     744 Aug 17  2018 top100passwd.txt
+-rw------- 1 ubuntu ubuntu    1369 Aug 17  2018 .viminfo
+-rw-rw-r-- 1 ubuntu ubuntu     185 Aug 17  2018 .wget-hsts
+ubuntu@ip-172-31-16-147:~$ vi shadow.txt
+ubuntu@ip-172-31-16-147:~$ cat shadow.txt
+csr:$6$JO/uxTJm$.57x6FKNsk11W1wGhyBNRwR44Cv8If5FnwbiL5FZ7.NhnCb858alQx3H7vFNOEXxx7vcpQ.sKNM0WizpgHPdB0:17987:0:99999:7:::
+nsa:$6$.Onk5s66$m18RWSQDuVzGu4YJ0FTBQUFjag/b3sHp5r.wpQVffU8JGhATD0UzIjvxBrrVE28QDiQiDfU5.4MRKv1VA0x6A/:17987:0:99999:7:::
+ubuntu@ip-172-31-16-147:~$ vi shadow.txt
+ubuntu@ip-172-31-16-147:~$ cat shadow.txt
+$6$JO/uxTJm$.57x6FKNsk11W1wGhyBNRwR44Cv8If5FnwbiL5FZ7.NhnCb858alQx3H7vFNOEXxx7vcpQ.sKNM0WizpgHPdB0
+$6$.Onk5s66$m18RWSQDuVzGu4YJ0FTBQUFjag/b3sHp5r.wpQVffU8JGhATD0UzIjvxBrrVE28QDiQiDfU5.4MRKv1VA0x6A/
+ubuntu@ip-172-31-16-147:~$ hashcat -m 1800 -o found1.txt shadow.txt top100passwd.txt
+hashcat (v4.1.0) starting...
+
+* Device #1: This hardware has outdated CUDA compute capability (3.7).
+             For modern OpenCL performance, upgrade to hardware that supports
+             CUDA compute capability version 5.0 (Maxwell) or higher.
+* Device #2: Not a native Intel OpenCL runtime. Expect massive speed loss.
+             You can use --force to override, but do not report related errors.
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: Tesla K80, 2860/11441 MB allocatable, 13MCU
+
+OpenCL Platform #2: The pocl project
+====================================
+* Device #2: pthread-Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz, skipped.
+
+Hashes: 2 digests; 2 unique digests, 2 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+Rules: 1
+
+Applicable optimizers:
+* Zero-Byte
+* Uses-64-Bit
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts > length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+* Device #1: build_opts '-cl-std=CL1.2 -I OpenCL -I /usr/share/hashcat/OpenCL -D VENDOR_ID=32 -D CUDA_ARCH=307 -D AMD_ROCM=0 -D VECT_SIZE=1 -D DEVICE_TYPE=4 -D DGST_R0=0 -D DGST_R1=1 -D DGST_R2=2 -D DGST_R3=3 -D DGST_ELEM=16 -D KERN_TYPE=1800 -D _unroll'
+Dictionary cache hit:
+* Filename..: top100passwd.txt
+* Passwords.: 100
+* Bytes.....: 744
+* Keyspace..: 100
+
+The wordlist or mask that you are using is too small.
+This means that hashcat cannot use the full parallel power of your device(s).
+Unless you supply more work, your cracking speed will drop.
+For tips on supplying more work, see: https://hashcat.net/faq/morework
+
+Approaching final keyspace - workload adjusted.
+
+
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: shadow.txt
+Time.Started.....: Mon Apr  1 19:59:28 2019 (1 sec)
+Time.Estimated...: Mon Apr  1 19:59:29 2019 (0 secs)
+Guess.Base.......: File (top100passwd.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:      216 H/s (1.43ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 2/2 (100.00%) Digests, 2/2 (100.00%) Salts
+Progress.........: 200/200 (100.00%)
+Rejected.........: 0/200 (0.00%)
+Restore.Point....: 0/100 (0.00%)
+Candidates.#1....: 123456 -> matrix
+HWMon.Dev.#1.....: Temp: 62c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+Started: Mon Apr  1 19:59:16 2019
+Stopped: Mon Apr  1 19:59:30 2019
+ubuntu@ip-172-31-16-147:~$ cat found1.txt
+$6$.Onk5s66$m18RWSQDuVzGu4YJ0FTBQUFjag/b3sHp5r.wpQVffU8JGhATD0UzIjvxBrrVE28QDiQiDfU5.4MRKv1VA0x6A/:biteme
+$6$JO/uxTJm$.57x6FKNsk11W1wGhyBNRwR44Cv8If5FnwbiL5FZ7.NhnCb858alQx3H7vFNOEXxx7vcpQ.sKNM0WizpgHPdB0:matrix
+ubuntu@ip-172-31-16-147:~$ wget http://ciast.uccs.edu/coursera/pub/shadow3
+--2019-04-01 20:08:40--  http://ciast.uccs.edu/coursera/pub/shadow3
+Resolving ciast.uccs.edu (ciast.uccs.edu)... 128.198.160.70
+Connecting to ciast.uccs.edu (ciast.uccs.edu)|128.198.160.70|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 131
+Saving to: ‘shadow3’
+
+shadow3                  100%[==================================>]     131  --.-KB/s    in 0s
+
+2019-04-01 20:08:40 (14.1 MB/s) - ‘shadow3’ saved [131/131]
+
+ubuntu@ip-172-31-16-147:~$ wget http://ciast.uccs.edu/coursera/pub/shadow2
+--2019-04-01 20:08:45--  http://ciast.uccs.edu/coursera/pub/shadow2
+Resolving ciast.uccs.edu (ciast.uccs.edu)... 128.198.160.70
+Connecting to ciast.uccs.edu (ciast.uccs.edu)|128.198.160.70|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 131
+Saving to: ‘shadow2’
+
+shadow2                  100%[==================================>]     131  --.-KB/s    in 0s
+
+2019-04-01 20:08:45 (13.2 MB/s) - ‘shadow2’ saved [131/131]
+
+ubuntu@ip-172-31-16-147:~$ wget http://ciast.uccs.edu/coursera/pub/shadow1
+--2019-04-01 20:08:50--  http://ciast.uccs.edu/coursera/pub/shadow1
+Resolving ciast.uccs.edu (ciast.uccs.edu)... 128.198.160.70
+Connecting to ciast.uccs.edu (ciast.uccs.edu)|128.198.160.70|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 131
+Saving to: ‘shadow1’
+
+shadow1                  100%[==================================>]     131  --.-KB/s    in 0s
+
+2019-04-01 20:08:50 (21.7 MB/s) - ‘shadow1’ saved [131/131]
+
+ubuntu@ip-172-31-16-147:~$ ls -al
+total 1624
+drwxr-xr-x 6 ubuntu ubuntu    4096 Apr  1 20:08 .
+drwxr-xr-x 3 root   root      4096 Aug 17  2018 ..
+-rw------- 1 ubuntu ubuntu     947 Aug 17  2018 .bash_history
+-rw-r--r-- 1 ubuntu ubuntu     220 Aug 31  2015 .bash_logout
+-rw-r--r-- 1 ubuntu ubuntu    3771 Aug 31  2015 .bashrc
+drwx------ 3 ubuntu ubuntu    4096 Aug 17  2018 .cache
+drwxr-xr-x 2 ubuntu ubuntu    4096 Aug 17  2018 .data
+-rw------- 1 ubuntu ubuntu     212 Apr  1 19:59 found1.txt
+drwx------ 4 ubuntu ubuntu    4096 Aug 17  2018 .hashcat
+-rw-r--r-- 1 ubuntu ubuntu      19 Aug 17  2018 hcmask
+-rw-rw-r-- 1 ubuntu ubuntu 1574395 Mar  5  2018 phpbb.txt
+-rw-r--r-- 1 ubuntu ubuntu     655 May 16  2017 .profile
+-rw-rw-r-- 1 ubuntu ubuntu     131 Sep 16  2017 shadow1
+-rw-r--r-- 1 ubuntu ubuntu     107 Aug 17  2018 shadow1.txt
+-rw-rw-r-- 1 ubuntu ubuntu     131 Sep 16  2017 shadow2
+-rw-r--r-- 1 ubuntu ubuntu     107 Aug 17  2018 shadow2.txt
+-rw-rw-r-- 1 ubuntu ubuntu     131 Sep 16  2017 shadow3
+-rw-r----- 1 ubuntu ubuntu     198 Apr  1 19:56 shadow.txt
+drwx------ 2 ubuntu ubuntu    4096 Aug 17  2018 .ssh
+-rw-r--r-- 1 ubuntu ubuntu       0 Aug 17  2018 .sudo_as_admin_successful
+-rw-r--r-- 1 ubuntu ubuntu     744 Aug 17  2018 top100passwd.txt
+-rw------- 1 ubuntu ubuntu    1711 Apr  1 19:56 .viminfo
+-rw-rw-r-- 1 ubuntu ubuntu     185 Apr  1 20:08 .wget-hsts
+ubuntu@ip-172-31-16-147:~$ cat shadow3
+amca:$6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofraeukRZXmTCuXE2P8CUAOnbFjbSYLAR7eReNTcOvDV45vgAzm70JCcv/:17402:0:99999:7:::
+ubuntu@ip-172-31-16-147:~$ cp shadow3 shadow3.txt
+ubuntu@ip-172-31-16-147:~$ vi shadow3.txt
+ubuntu@ip-172-31-16-147:~$ ls -al
+total 1628
+drwxr-xr-x 6 ubuntu ubuntu    4096 Apr  1 20:09 .
+drwxr-xr-x 3 root   root      4096 Aug 17  2018 ..
+-rw------- 1 ubuntu ubuntu     947 Aug 17  2018 .bash_history
+-rw-r--r-- 1 ubuntu ubuntu     220 Aug 31  2015 .bash_logout
+-rw-r--r-- 1 ubuntu ubuntu    3771 Aug 31  2015 .bashrc
+drwx------ 3 ubuntu ubuntu    4096 Aug 17  2018 .cache
+drwxr-xr-x 2 ubuntu ubuntu    4096 Aug 17  2018 .data
+-rw------- 1 ubuntu ubuntu     212 Apr  1 19:59 found1.txt
+drwx------ 4 ubuntu ubuntu    4096 Aug 17  2018 .hashcat
+-rw-r--r-- 1 ubuntu ubuntu      19 Aug 17  2018 hcmask
+-rw-rw-r-- 1 ubuntu ubuntu 1574395 Mar  5  2018 phpbb.txt
+-rw-r--r-- 1 ubuntu ubuntu     655 May 16  2017 .profile
+-rw-rw-r-- 1 ubuntu ubuntu     131 Sep 16  2017 shadow1
+-rw-r--r-- 1 ubuntu ubuntu     107 Aug 17  2018 shadow1.txt
+-rw-rw-r-- 1 ubuntu ubuntu     131 Sep 16  2017 shadow2
+-rw-r--r-- 1 ubuntu ubuntu     107 Aug 17  2018 shadow2.txt
+-rw-rw-r-- 1 ubuntu ubuntu     131 Sep 16  2017 shadow3
+-rw-rw-r-- 1 ubuntu ubuntu     131 Apr  1 20:09 shadow3.txt
+-rw-r----- 1 ubuntu ubuntu     198 Apr  1 19:56 shadow.txt
+drwx------ 2 ubuntu ubuntu    4096 Aug 17  2018 .ssh
+-rw-r--r-- 1 ubuntu ubuntu       0 Aug 17  2018 .sudo_as_admin_successful
+-rw-r--r-- 1 ubuntu ubuntu     744 Aug 17  2018 top100passwd.txt
+-rw------- 1 ubuntu ubuntu    2346 Apr  1 20:09 .viminfo
+-rw-rw-r-- 1 ubuntu ubuntu     185 Apr  1 20:08 .wget-hsts
+ubuntu@ip-172-31-16-147:~$ vi shadow3.txt
+ubuntu@ip-172-31-16-147:~$ cat shadow3.txt
+$6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofraeukRZXmTCuXE2P8CUAOnbFjbSYLAR7eReNTcOvDV45vgAzm70JCcv/
+ubuntu@ip-172-31-16-147:~$ echo '\#a101?d?d?d?d?d?d' > m2.hcmask
+ubuntu@ip-172-31-16-147:~$ cat m2.hcmask
+\#a101?d?d?d?d?d?d
+ubuntu@ip-172-31-16-147:~$ hashcat -m 1800 -o found2a.txt -a 3 shadow3.txt m2.hcmask
+hashcat (v4.1.0) starting...
+
+* Device #1: This hardware has outdated CUDA compute capability (3.7).
+             For modern OpenCL performance, upgrade to hardware that supports
+             CUDA compute capability version 5.0 (Maxwell) or higher.
+* Device #2: Not a native Intel OpenCL runtime. Expect massive speed loss.
+             You can use --force to override, but do not report related errors.
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: Tesla K80, 2860/11441 MB allocatable, 13MCU
+
+OpenCL Platform #2: The pocl project
+====================================
+* Device #2: pthread-Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz, skipped.
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Single-Hash
+* Single-Salt
+* Brute-Force
+* Uses-64-Bit
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts > length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+* Device #1: build_opts '-cl-std=CL1.2 -I OpenCL -I /usr/share/hashcat/OpenCL -D VENDOR_ID=32 -D CUDA_ARCH=307 -D AMD_ROCM=0 -D VECT_SIZE=1 -D DEVICE_TYPE=4 -D DGST_R0=0 -D DGST_R1=1 -D DGST_R2=2 -D DGST_R3=3 -D DGST_ELEM=16 -D KERN_TYPE=1800 -D _unroll'
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit => s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofr...0JCcv/
+Time.Started.....: Mon Apr  1 20:14:25 2019 (3 secs)
+Time.Estimated...: Mon Apr  1 20:16:58 2019 (2 mins, 30 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6560 H/s (6.36ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts
+Progress.........: 13312/1000000 (1.33%)
+Rejected.........: 0/13312 (0.00%)
+Restore.Point....: 13312/1000000 (1.33%)
+Candidates.#1....: #a101191900 -> #a101072878
+HWMon.Dev.#1.....: Temp: 65c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit => s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofr...0JCcv/
+Time.Started.....: Mon Apr  1 20:14:25 2019 (6 secs)
+Time.Estimated...: Mon Apr  1 20:16:58 2019 (2 mins, 27 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6490 H/s (6.34ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts
+Progress.........: 39936/1000000 (3.99%)
+Rejected.........: 0/39936 (0.00%)
+Restore.Point....: 39936/1000000 (3.99%)
+Candidates.#1....: #a101517323 -> #a101807056
+HWMon.Dev.#1.....: Temp: 66c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+Cracking performance lower than expected?
+
+* Append -O to the commandline.
+  This lowers the maximum supported password- and salt-length (typically down to 32).
+
+* Append -w 3 to the commandline.
+  This can cause your screen to lag.
+
+* Update your OpenCL runtime / driver the right way:
+  https://hashcat.net/faq/wrongdriver
+
+* Create more work items to make use of your parallelization power:
+  https://hashcat.net/faq/morework
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit => s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofr...0JCcv/
+Time.Started.....: Mon Apr  1 20:14:25 2019 (13 secs)
+Time.Estimated...: Mon Apr  1 20:16:59 2019 (2 mins, 21 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6484 H/s (6.34ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts
+Progress.........: 79872/1000000 (7.99%)
+Rejected.........: 0/79872 (0.00%)
+Restore.Point....: 79872/1000000 (7.99%)
+Candidates.#1....: #a101159469 -> #a101098045
+HWMon.Dev.#1.....: Temp: 68c Util: 98% Core: 875MHz Mem:2505MHz Bus:16
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit => s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofr...0JCcv/
+Time.Started.....: Mon Apr  1 20:14:25 2019 (22 secs)
+Time.Estimated...: Mon Apr  1 20:17:00 2019 (2 mins, 13 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6483 H/s (6.37ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts
+Progress.........: 133120/1000000 (13.31%)
+Rejected.........: 0/133120 (0.00%)
+Restore.Point....: 133120/1000000 (13.31%)
+Candidates.#1....: #a101977088 -> #a101224710
+HWMon.Dev.#1.....: Temp: 71c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit => s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofr...0JCcv/
+Time.Started.....: Mon Apr  1 20:14:25 2019 (25 secs)
+Time.Estimated...: Mon Apr  1 20:16:59 2019 (2 mins, 9 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6482 H/s (6.34ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts
+Progress.........: 159744/1000000 (15.97%)
+Rejected.........: 0/159744 (0.00%)
+Restore.Point....: 159744/1000000 (15.97%)
+Candidates.#1....: #a101337350 -> #a101445266
+HWMon.Dev.#1.....: Temp: 72c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit => s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofr...0JCcv/
+Time.Started.....: Mon Apr  1 20:14:25 2019 (27 secs)
+Time.Estimated...: Mon Apr  1 20:16:59 2019 (2 mins, 7 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6481 H/s (6.34ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts
+Progress.........: 173056/1000000 (17.31%)
+Rejected.........: 0/173056 (0.00%)
+Restore.Point....: 173056/1000000 (17.31%)
+Candidates.#1....: #a101555266 -> #a101860277
+HWMon.Dev.#1.....: Temp: 72c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit => s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofr...0JCcv/
+Time.Started.....: Mon Apr  1 20:14:25 2019 (31 secs)
+Time.Estimated...: Mon Apr  1 20:16:59 2019 (2 mins, 3 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6480 H/s (6.34ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts
+Progress.........: 199680/1000000 (19.97%)
+Rejected.........: 0/199680 (0.00%)
+Restore.Point....: 199680/1000000 (19.97%)
+Candidates.#1....: #a101935730 -> #a101297107
+HWMon.Dev.#1.....: Temp: 73c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit => s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofr...0JCcv/
+Time.Started.....: Mon Apr  1 20:14:25 2019 (1 min, 6 secs)
+Time.Estimated...: Mon Apr  1 20:17:01 2019 (1 min, 30 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6475 H/s (6.38ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts
+Progress.........: 412672/1000000 (41.27%)
+Rejected.........: 0/412672 (0.00%)
+Restore.Point....: 412672/1000000 (41.27%)
+Candidates.#1....: #a101153013 -> #a101097213
+HWMon.Dev.#1.....: Temp: 78c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit => s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofr...0JCcv/
+Time.Started.....: Mon Apr  1 20:14:25 2019 (1 min, 53 secs)
+Time.Estimated...: Mon Apr  1 20:17:01 2019 (43 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6470 H/s (6.38ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts
+Progress.........: 718848/1000000 (71.88%)
+Rejected.........: 0/718848 (0.00%)
+Restore.Point....: 718848/1000000 (71.88%)
+Candidates.#1....: #a101604882 -> #a101798709
+HWMon.Dev.#1.....: Temp: 81c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+[s]tatus [p]ause [b]ypass [c]heckpoint [q]uit => s
+
+Session..........: hashcat
+Status...........: Running
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofr...0JCcv/
+Time.Started.....: Mon Apr  1 20:14:25 2019 (2 mins, 10 secs)
+Time.Estimated...: Mon Apr  1 20:16:59 2019 (24 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6469 H/s (6.38ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 0/1 (0.00%) Digests, 0/1 (0.00%) Salts
+Progress.........: 838656/1000000 (83.87%)
+Rejected.........: 0/838656 (0.00%)
+Restore.Point....: 838656/1000000 (83.87%)
+Candidates.#1....: #a101553803 -> #a101864148
+HWMon.Dev.#1.....: Temp: 82c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofr...0JCcv/
+Time.Started.....: Mon Apr  1 20:14:25 2019 (2 mins, 30 secs)
+Time.Estimated...: Mon Apr  1 20:16:55 2019 (0 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6467 H/s (6.36ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts
+Progress.........: 971776/1000000 (97.18%)
+Rejected.........: 0/971776 (0.00%)
+Restore.Point....: 958464/1000000 (95.85%)
+Candidates.#1....: #a101361629 -> #a101465029
+HWMon.Dev.#1.....: Temp: 81c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+Started: Mon Apr  1 20:14:12 2019
+Stopped: Mon Apr  1 20:16:57 2019
+ubuntu@ip-172-31-16-147:~$ cat found2a.txt
+$6$9XO7r56HUdnP4BVM$XC47J/U9ZHyE4RL4l9P9Ps6zXZnZofraeukRZXmTCuXE2P8CUAOnbFjbSYLAR7eReNTcOvDV45vgAzm70JCcv/:#a101754157
+ubuntu@ip-172-31-16-147:~$ cat shadow2.txt
+$6$mvGQ9ZN.JvN8XT5F$mJC8rN3Liu4BGzX3/oWFHOIpi/AcfXQtaw.0EUGPXw.4PZog54yuhYh4sybXpMKH9sPd41QLYldXrlFmMe0xa.
+ubuntu@ip-172-31-16-147:~$ cat shadow1.txt
+$6$bqFBwOpWR8foxB2L$3wM6Gsq0dRp970aCkAm0Es1KGDO1M7DVNzuxM7vIQfNNG7OnOv8jIw/z.aSbZyVBZeQk7KTaGAzkSMHiFjdu20
+ubuntu@ip-172-31-16-147:~$ hashcat -m 1800 -o found2b.txt -a 3 shadow2.txt m2.hcmask
+hashcat (v4.1.0) starting...
+
+* Device #1: This hardware has outdated CUDA compute capability (3.7).
+             For modern OpenCL performance, upgrade to hardware that supports
+             CUDA compute capability version 5.0 (Maxwell) or higher.
+* Device #2: Not a native Intel OpenCL runtime. Expect massive speed loss.
+             You can use --force to override, but do not report related errors.
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: Tesla K80, 2860/11441 MB allocatable, 13MCU
+
+OpenCL Platform #2: The pocl project
+====================================
+* Device #2: pthread-Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz, skipped.
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Single-Hash
+* Single-Salt
+* Brute-Force
+* Uses-64-Bit
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts > length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+* Device #1: build_opts '-cl-std=CL1.2 -I OpenCL -I /usr/share/hashcat/OpenCL -D VENDOR_ID=32 -D CUDA_ARCH=307 -D AMD_ROCM=0 -D VECT_SIZE=1 -D DEVICE_TYPE=4 -D DGST_R0=0 -D DGST_R1=1 -D DGST_R2=2 -D DGST_R3=3 -D DGST_ELEM=16 -D KERN_TYPE=1800 -D _unroll'
+Cracking performance lower than expected?
+
+* Append -O to the commandline.
+  This lowers the maximum supported password- and salt-length (typically down to 32).
+
+* Append -w 3 to the commandline.
+  This can cause your screen to lag.
+
+* Update your OpenCL runtime / driver the right way:
+  https://hashcat.net/faq/wrongdriver
+
+* Create more work items to make use of your parallelization power:
+  https://hashcat.net/faq/morework
+
+
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$mvGQ9ZN.JvN8XT5F$mJC8rN3Liu4BGzX3/oWFHOIpi/AcfXQ...Me0xa.
+Time.Started.....: Mon Apr  1 20:19:07 2019 (25 secs)
+Time.Estimated...: Mon Apr  1 20:19:32 2019 (0 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6482 H/s (6.34ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts
+Progress.........: 159744/1000000 (15.97%)
+Rejected.........: 0/159744 (0.00%)
+Restore.Point....: 146432/1000000 (14.64%)
+Candidates.#1....: #a101113677 -> #a101028350
+HWMon.Dev.#1.....: Temp: 71c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+Started: Mon Apr  1 20:18:54 2019
+Stopped: Mon Apr  1 20:19:32 2019
+ubuntu@ip-172-31-16-147:~$ hashcat -m 1800 -o found2c.txt -a 3 shadow1.txt m2.hcmask
+hashcat (v4.1.0) starting...
+
+* Device #1: This hardware has outdated CUDA compute capability (3.7).
+             For modern OpenCL performance, upgrade to hardware that supports
+             CUDA compute capability version 5.0 (Maxwell) or higher.
+* Device #2: Not a native Intel OpenCL runtime. Expect massive speed loss.
+             You can use --force to override, but do not report related errors.
+nvmlDeviceGetFanSpeed(): Not Supported
+
+OpenCL Platform #1: NVIDIA Corporation
+======================================
+* Device #1: Tesla K80, 2860/11441 MB allocatable, 13MCU
+
+OpenCL Platform #2: The pocl project
+====================================
+* Device #2: pthread-Intel(R) Xeon(R) CPU E5-2686 v4 @ 2.30GHz, skipped.
+
+Hashes: 1 digests; 1 unique digests, 1 unique salts
+Bitmaps: 16 bits, 65536 entries, 0x0000ffff mask, 262144 bytes, 5/13 rotates
+
+Applicable optimizers:
+* Zero-Byte
+* Single-Hash
+* Single-Salt
+* Brute-Force
+* Uses-64-Bit
+
+Minimum password length supported by kernel: 0
+Maximum password length supported by kernel: 256
+
+ATTENTION! Pure (unoptimized) OpenCL kernels selected.
+This enables cracking passwords and salts > length 32 but for the price of drastically reduced performance.
+If you want to switch to optimized OpenCL kernels, append -O to your commandline.
+
+Watchdog: Temperature abort trigger set to 90c
+
+* Device #1: build_opts '-cl-std=CL1.2 -I OpenCL -I /usr/share/hashcat/OpenCL -D VENDOR_ID=32 -D CUDA_ARCH=307 -D AMD_ROCM=0 -D VECT_SIZE=1 -D DEVICE_TYPE=4 -D DGST_R0=0 -D DGST_R1=1 -D DGST_R2=2 -D DGST_R3=3 -D DGST_ELEM=16 -D KERN_TYPE=1800 -D _unroll'
+Cracking performance lower than expected?
+
+* Append -O to the commandline.
+  This lowers the maximum supported password- and salt-length (typically down to 32).
+
+* Append -w 3 to the commandline.
+  This can cause your screen to lag.
+
+* Update your OpenCL runtime / driver the right way:
+  https://hashcat.net/faq/wrongdriver
+
+* Create more work items to make use of your parallelization power:
+  https://hashcat.net/faq/morework
+
+
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: sha512crypt $6$, SHA512 (Unix)
+Hash.Target......: $6$bqFBwOpWR8foxB2L$3wM6Gsq0dRp970aCkAm0Es1KGDO1M7D...Fjdu20
+Time.Started.....: Mon Apr  1 20:20:20 2019 (37 secs)
+Time.Estimated...: Mon Apr  1 20:20:57 2019 (0 secs)
+Guess.Mask.......: #a101?d?d?d?d?d?d [11]
+Guess.Queue......: 1/1 (100.00%)
+Speed.Dev.#1.....:     6473 H/s (6.35ms) @ Accel:32 Loops:16 Thr:32 Vec:1
+Recovered........: 1/1 (100.00%) Digests, 1/1 (100.00%) Salts
+Progress.........: 239616/1000000 (23.96%)
+Rejected.........: 0/239616 (0.00%)
+Restore.Point....: 226304/1000000 (22.63%)
+Candidates.#1....: #a101319607 -> #a101453707
+HWMon.Dev.#1.....: Temp: 76c Util: 97% Core: 875MHz Mem:2505MHz Bus:16
+
+Started: Mon Apr  1 20:20:07 2019
+Stopped: Mon Apr  1 20:20:58 2019
+ubuntu@ip-172-31-16-147:~$
